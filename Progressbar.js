@@ -1,19 +1,26 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import ProgressBar from "react-native-animated-progress";
 
-const Progressbar = ({title,value,colour}) => {
-  //calculation of width  
-  const width = value * 100/120
- 
+const Progressbar = ({ title, value, colour }) => { 
+  //calculation of width
+  const width = (value * 100) / 120;
+
   return (
     <View>
       <View style={styles.titlecontainer}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={[styles.value , {color:colour}]}>{value < 10 ? `0${value}` : value}</Text>
+        <Text style={[styles.value, { color: colour }]}>
+          {value < 10 ? `0${value}` : value}
+        </Text>
       </View>
-      <View>
-        <View style={styles.line}></View>
-        <View style={[styles.valueline, {backgroundColor:colour, width:`${width}%`}]}></View>
+      <View style={{ paddingVertical: 10 }}>
+        <ProgressBar
+          progress={width}
+          height={10}
+          backgroundColor={colour}
+          trackColor="#e5e5e5"
+        />
       </View>
     </View>
   );
